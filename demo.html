@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB Workout Timer - Smart Interval Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 1.05em;
+        }
+
+        .screenshots {
+            margin: 60px 0;
+        }
+
+        .screenshots h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #2d3748;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .screenshot-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-caption {
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .tech-stack {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 60px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .tech-stack h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #2d3748;
+            text-align: center;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .tech-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .footer h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .footer p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        code {
+            background: #f7fafc;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            color: #667eea;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 AB Workout Timer</h1>
+            <p>A beautiful, production-ready progressive web app for interval-based workouts with automatic scheduling, exercise demonstrations, and audio cues.</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/waterbourne/workout-timer" class="btn btn-primary" target="_blank">📦 View on GitHub</a>
+                <a href="index.html" class="btn btn-secondary">🚀 Try Live Demo</a>
+            </div>
+        </header>
+
+        <div class="features">
+            <div class="feature">
+                <h3>🎯 Smart Scheduling</h3>
+                <p>Automatically loads the right workout based on time of day. Set your schedule (e.g., 5am, 8am, 11am) and the app rotates through workouts intelligently.</p>
+            </div>
+            <div class="feature">
+                <h3>⏱️ Professional Timer</h3>
+                <p>30-second prep, 45-second work intervals, 15-second rest. Audio beeps for transitions, visual progress bars, and phase indicators keep you locked in.</p>
+            </div>
+            <div class="feature">
+                <h3>💪 Exercise Library</h3>
+                <p>Detailed form cues, safety tips, and breathing guidance for every exercise. Know exactly what to do and how to do it right.</p>
+            </div>
+            <div class="feature">
+                <h3>📱 Mobile-First PWA</h3>
+                <p>Installs like a native app, works offline, prevents accidental refresh. Dark theme with high contrast for gym lighting.</p>
+            </div>
+            <div class="feature">
+                <h3>🎨 Zero Dependencies</h3>
+                <p>Pure vanilla JavaScript. No frameworks, no build process, no npm. Just drop the files and serve.</p>
+            </div>
+            <div class="feature">
+                <h3>🤖 Agent-Ready</h3>
+                <p>Includes AGENTS.md with complete setup instructions. Your AI agent can clone, customize, and deploy this app automatically.</p>
+            </div>
+        </div>
+
+        <section class="screenshots">
+            <h2>See It In Action</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <img src="screenshots/start-screen.png" alt="Start Screen">
+                    <div class="screenshot-caption">Clean start screen with workout preview</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="screenshots/prep-phase.png" alt="Prep Phase">
+                    <div class="screenshot-caption">30-second prep countdown to get ready</div>
+                </div>
+                <div class="screenshot-item">
+                    <img src="screenshots/exercise-details.png" alt="Exercise Details">
+                    <div class="screenshot-caption">Detailed form cues for every exercise</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tech-stack">
+            <h2>Built With Excellence</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                Following the <span class="highlight">"Boil the ocean"</span> philosophy: <em>"The marginal cost of completeness is near zero with AI. Do the whole thing."</em>
+            </p>
+            <div class="tech-list">
+                <span class="tech-badge">Vanilla JavaScript</span>
+                <span class="tech-badge">Web Audio API</span>
+                <span class="tech-badge">LocalStorage</span>
+                <span class="tech-badge">Service Worker</span>
+                <span class="tech-badge">CSS Grid + Flexbox</span>
+                <span class="tech-badge">PWA Manifest</span>
+                <span class="tech-badge">Zero Build Process</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h2>Get Started in 30 Seconds</h2>
+            <p>Clone, serve, and workout. It's that simple.</p>
+            <div style="background: #f7fafc; padding: 20px; border-radius: 10px; text-align: left; max-width: 600px; margin: 0 auto; font-family: monospace;">
+                <div style="color: #718096; margin-bottom: 10px;"># Clone the repo</div>
+                <div>git clone https://github.com/waterbourne/workout-timer</div>
+                <div style="margin-top: 15px; color: #718096; margin-bottom: 10px;"># Serve it</div>
+                <div>cd workout-timer && python3 -m http.server 8080</div>
+                <div style="margin-top: 15px; color: #718096; margin-bottom: 10px;"># Open in browser</div>
+                <div>http://localhost:8080</div>
+            </div>
+            <div class="cta-buttons" style="margin-top: 40px;">
+                <a href="https://github.com/waterbourne/workout-timer" class="btn btn-primary" target="_blank">⭐ Star on GitHub</a>
+                <a href="https://github.com/waterbourne/workout-timer/fork" class="btn btn-secondary" target="_blank">🍴 Fork & Customize</a>
+            </div>
+            <p style="margin-top: 40px; font-size: 1em; color: #a0aec0;">
+                <strong>Holy shit, that's done.</strong> 🎯
+            </p>
+        </div>
+    </div>
+</body>
+</html>
