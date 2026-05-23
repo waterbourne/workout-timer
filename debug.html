@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Workout Data</title>
+</head>
+<body>
+    <h1>Workout Debug</h1>
+    <div id="output"></div>
+    
+    <script src="workouts.js"></script>
+    <script>
+        const output = document.getElementById('output');
+        const now = new Date();
+        const dayOfWeek = now.getDay();
+        const hour = now.getHours();
+        
+        // Convert to our day system (day1 = Sunday)
+        const dayKey = `day${dayOfWeek === 0 ? 7 : dayOfWeek}`;
+        const workoutKey = `${dayKey}_20`; // 8pm workout
+        
+        output.innerHTML = `
+            <p><strong>Current time:</strong> ${now.toLocaleString()}</p>
+            <p><strong>Day of week:</strong> ${dayOfWeek} (${dayKey})</p>
+            <p><strong>Hour:</strong> ${hour}</p>
+            <p><strong>Looking for workout:</strong> ${workoutKey}</p>
+            <p><strong>Workout exists:</strong> ${workoutKey in WORKOUTS}</p>
+        `;
+        
+        if (WORKOUTS[workoutKey]) {
+            const workout = WORKOUTS[workoutKey];
+            output.innerHTML += `
+                <h2>Workout Found!</h2>
+                <p><strong>Title:</strong> ${workout.title}</p>
+                <p><strong>First exercise:</strong> ${workout.exercises[0].name}</p>
+                <p><strong>Demo field exists:</strong> ${!!workout.exercises[0].demo}</p>
+                <p><strong>Demo content:</strong></p>
+                <textarea style="width:100%; height:100px;">${workout.exercises[0].demo}</textarea>
+            `;
+        } else {
+            output.innerHTML += '<p style="color:red;">❌ Workout NOT found!</p>';
+            output.innerHTML += '<h2>Available workouts:</h2>';
+            output.innerHTML += '<ul>';
+            Object.keys(WORKOUTS).forEach(key => {
+                output.innerHTML += `<li>${key}: ${WORKOUTS[key].title}</li>`;
+            });
+            output.innerHTML += '</ul>';
+        }
+    </script>
+</body>
+</html>
